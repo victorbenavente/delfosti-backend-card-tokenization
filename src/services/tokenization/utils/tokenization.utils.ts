@@ -1,3 +1,5 @@
+import { randomBytes } from 'crypto';
+
 export function validateCardWithLuhn(card: string): boolean {
   const cardNumbers = card.split('').map(Number).reverse();
   const cardNumbersSumatory = cardNumbers.reduce(
@@ -13,4 +15,13 @@ export function validateCardWithLuhn(card: string): boolean {
     0,
   );
   return cardNumbersSumatory % 10 === 0;
+}
+
+export function generateToken(): string {
+  const hash = randomBytes(16);
+  const token = hash
+    .toString('base64')
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .slice(0, 16);
+  return token;
 }

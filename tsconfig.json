@@ -1,14 +1,24 @@
 {
   "compilerOptions": {
-    "preserveConstEnums": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
     "allowJs": true,
-    "target": "ES2020",
-    "outDir": ".build",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
     "moduleResolution": "node",
-    "lib": ["es2015"],
-    "rootDir": "./",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
     "esModuleInterop": true,
-  }
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules", "dist", "coverage"],
+  "include": ["src"]
 }

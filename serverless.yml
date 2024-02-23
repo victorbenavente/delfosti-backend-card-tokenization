@@ -4,15 +4,30 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs18.x
+  region: us-east-2
 
 functions:
   api:
-    handler: src/index.handler
+    handler: src/functions/health.handler
     events:
       - httpApi:
-          path: /
+          path: /health
           method: get
 
+resources:
+  Resources:
+    Personas:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Card
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
 plugins:
-  - serverless-offline
   - serverless-plugin-typescript
+  - serverless-offline
