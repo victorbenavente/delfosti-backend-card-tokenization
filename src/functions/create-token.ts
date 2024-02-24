@@ -9,7 +9,7 @@ import {
 } from '../services/tokenization/dtos/create-token-request.dto';
 import middy from '@middy/core';
 import { httpErrorHandler } from '../common/errors/error-handler';
-import { merchantAuthMiddleware } from '../common/middlewares/merchant-auth.middleware';
+import { merchantAuthMiddleware } from '../common/middlewares/auth-merchant.middleware';
 import { TokenizationService } from '../services/tokenization/tokenization.service';
 import { TokenResponse } from '../services/tokenization/dtos/token.response.dto';
 

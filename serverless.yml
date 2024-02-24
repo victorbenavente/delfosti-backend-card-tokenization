@@ -21,6 +21,12 @@ functions:
       - httpApi:
           path: /create-token
           method: post
+  getCardInformation:
+    handler: src/functions/get-card-information.handler
+    events:
+      - httpApi:
+          path: /card-information/{token}
+          method: get
 
 resources:
   Resources:
