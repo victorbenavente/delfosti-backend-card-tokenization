@@ -1,15 +1,22 @@
-import 'reflect-metadata';
-import { APIGatewayProxyResult } from 'aws-lambda';
+import {
+  APIGatewayProxyResult,
+  APIGatewayProxyEvent,
+  APIGatewayProxyHandler,
+} from 'aws-lambda';
 import { CreateTokenRequest } from '../services/tokenization/dtos/create-token-request.dto';
-import { composeHandler } from '@lambda-middleware/compose';
-import { classValidator } from '@lambda-middleware/class-validator';
-import { errorHandler } from "@lambda-middleware/http-error-handler";
+import { validateRequest } from '../services/tokenization/utils/validators';
+import middy from '@middy/core';
+import { httpErrorHandler } from '../common/errors/error-handler';
+import { merchantAuthMiddleware } from '../common/middlewares/merchant-auth.middleware';
 
-export const createToken = async (event: {
-  body: CreateTokenRequest;
-}): Promise<APIGatewayProxyResult> => {
+export const createToken = async (
+  event: APIGatewayProxyEvent,
+): Promise<APIGatewayProxyResult> => {
+  const request: CreateTokenRequest = JSON.parse(event.body as any);
+  validateRequest(request);
+
   return {
-    body: `Hello ${event.body.card_number} ${event.body.email}`,
+    body: `Hello ${request.card_number} ${request.email}`,
     headers: {
       'content-type': 'text',
     },
@@ -17,12 +24,7 @@ export const createToken = async (event: {
   };
 };
 
-export const handler = composeHandler(
-  errorHandler(),
-  classValidator({
-    bodyType: CreateTokenRequest,
-    transformer: {},
-    validator: {},
-  }),
-  createToken,
-);
+export const handler: APIGatewayProxyHandler = middy()
+  .before(merchantAuthMiddleware)
+  .onError(httpErrorHandler)
+  .handler(createToken);
