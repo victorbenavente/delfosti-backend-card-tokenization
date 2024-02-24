@@ -17,6 +17,7 @@
     "jest": "^29.7.0",
     "prettier": "^3.2.5",
     "serverless-offline": "^13.3.3",
+    "serverless-offline-redis-server": "^0.0.2",
     "serverless-plugin-typescript": "^2.1.5",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
@@ -26,6 +27,7 @@
     "root": true
   },
   "dependencies": {
+    "@keyv/redis": "^2.8.4",
     "@lambda-middleware/class-validator": "^2.0.1",
     "@lambda-middleware/compose": "^1.2.0",
     "@lambda-middleware/http-error-handler": "^2.0.0",
@@ -37,8 +39,10 @@
     "http-errors": "^2.0.0",
     "is-email": "^1.0.2",
     "is-uuid": "^1.0.2",
+    "keyv": "^4.5.4",
     "middy-middleware-class-validator": "^2.0.2",
     "middy-middleware-json-error-handler": "^4.0.0",
+    "redis": "^4.6.13",
     "reflect-metadata": "^0.2.1",
     "serverless-esbuild": "^1.51.0",
     "superstruct": "^1.0.3"

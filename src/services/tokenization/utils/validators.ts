@@ -5,9 +5,8 @@ import {
   min,
   length,
 } from 'class-validator';
-import { Result, assert, define, object } from 'superstruct';
+import { Result, define } from 'superstruct';
 import { validateCardWithLuhn } from './tokenization.utils';
-import { CreateTokenRequest } from '../dtos/create-token-request.dto';
 
 export const isValidCvv = define('credit card cvv', (cvv: any): Result => {
   return isNumberString(cvv) && length(cvv, 3, 4);
@@ -41,15 +40,3 @@ export const isValidMonth = define(
     return min(Number(month), 1) && max(Number(month), 12);
   },
 );
-
-export const isValidCreateTokenRequest = object({
-  card_number: isValidCard,
-  cvv: isValidCvv,
-  expiration_month: isValidMonth,
-  expiration_year: isValidYear,
-  email: isEmail,
-});
-
-export function validateRequest(data: CreateTokenRequest) {
-  assert(data, isValidCreateTokenRequest);
-}

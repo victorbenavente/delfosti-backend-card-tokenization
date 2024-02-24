@@ -5,6 +5,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-2
+  environment:
+    REDIS_URL: 'redis://:root@127.0.0.1:6379/0'
 
 functions:
   health:

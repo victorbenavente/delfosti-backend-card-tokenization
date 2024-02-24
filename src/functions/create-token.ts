@@ -3,23 +3,24 @@ import {
   APIGatewayProxyEvent,
   APIGatewayProxyHandler,
 } from 'aws-lambda';
-import { CreateTokenRequest } from '../services/tokenization/dtos/create-token-request.dto';
-import { validateRequest } from '../services/tokenization/utils/validators';
+import {
+  CreateTokenRequest,
+  ICreateTokenRequest,
+} from '../services/tokenization/dtos/create-token-request.dto';
 import middy from '@middy/core';
 import { httpErrorHandler } from '../common/errors/error-handler';
 import { merchantAuthMiddleware } from '../common/middlewares/merchant-auth.middleware';
+import { TokenizationService } from '../services/tokenization/services/tokenization.service';
 
 export const createToken = async (
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
-  const request: CreateTokenRequest = JSON.parse(event.body as any);
-  validateRequest(request);
-
+  const data: ICreateTokenRequest = JSON.parse(event.body as any);
+  const request = new CreateTokenRequest(data);
+  request.isValid();
+  const result = await TokenizationService.tokenize(request);
   return {
-    body: `Hello ${request.card_number} ${request.email}`,
-    headers: {
-      'content-type': 'text',
-    },
+    body: JSON.stringify(result),
     statusCode: 200,
   };
 };
