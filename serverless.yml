@@ -1,5 +1,5 @@
 service: delfosti-backend-card-tokenization
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -7,12 +7,18 @@ provider:
   region: us-east-2
 
 functions:
-  api:
+  health:
     handler: src/functions/health.handler
     events:
       - httpApi:
           path: /health
           method: get
+  createToken:
+    handler: src/functions/create-token.handler
+    events:
+      - httpApi:
+          path: /create-token
+          method: post
 
 resources:
   Resources:

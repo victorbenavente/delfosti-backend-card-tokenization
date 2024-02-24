@@ -1,5 +1,9 @@
 import { randomBytes } from 'crypto';
 
+export function validateCardLength(card: string): boolean {
+  return card.length > 14 || card.length < 17;
+}
+
 export function validateCardWithLuhn(card: string): boolean {
   const cardNumbers = card.split('').map(Number).reverse();
   const cardNumbersSumatory = cardNumbers.reduce(

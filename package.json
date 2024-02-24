@@ -7,6 +7,7 @@
     "@jest/globals": "^29.7.0",
     "@serverless/eslint-config": "^5.1.0",
     "@types/aws-lambda": "^8.10.134",
+    "@types/http-errors": "^2.0.4",
     "@types/jest": "^29.5.12",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
@@ -22,7 +23,16 @@
     "root": true
   },
   "dependencies": {
+    "@lambda-middleware/class-validator": "^2.0.1",
+    "@lambda-middleware/compose": "^1.2.0",
+    "@lambda-middleware/http-error-handler": "^2.0.0",
+    "@middy/core": "^5.2.4",
+    "@middy/http-json-body-parser": "^5.2.4",
     "aws-sdk": "^2.1564.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "http-errors": "^2.0.0",
+    "reflect-metadata": "^0.2.1",
     "ts-jest": "^29.1.2"
   },
   "jest": {
