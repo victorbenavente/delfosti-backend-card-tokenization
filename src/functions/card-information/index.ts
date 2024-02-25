@@ -3,12 +3,12 @@ import {
   APIGatewayProxyHandler,
   APIGatewayProxyResult,
 } from 'aws-lambda';
-import { merchantAuthMiddleware } from '../common/middlewares/auth-merchant.middleware';
+import { merchantAuthMiddleware } from '../../common/middlewares/auth-merchant.middleware';
 import middy from '@middy/core';
-import { httpErrorHandler } from '../common/errors/error-handler';
-import { CardInformationService } from '../services/card-information/card-information.service';
-import { CardInfoResponse } from '../services/card-information/dtos/card-info.response.dto';
-import { GetCardInfoRequest } from '../services/card-information/dtos/get-card-info.request.dto';
+import { httpErrorHandler } from '../../common/errors/error-handler';
+import { CardInformationService } from './services/card-information.service';
+import { CardInfoResponse } from './dtos/card-info.response.dto';
+import { GetCardInfoRequest } from './dtos/get-card-info.request.dto';
 
 export const getCardInformation = async (
   event: APIGatewayProxyEvent,

@@ -1,7 +1,7 @@
-import { keyv } from '../../common/redis-store/redis-store';
-import { CreateTokenRequest } from './dtos/create-token-request.dto';
-import { TokenResponse } from './dtos/token.response.dto';
-import { generateToken } from './utils/tokenization.utils';
+import { keyv } from '../../../common/redis-store/redis-store';
+import { CreateTokenRequest } from '../dtos/create-token-request.dto';
+import { TokenResponse } from '../dtos/token.response.dto';
+import { generateToken } from '../utils/tokenization.utils';
 
 const TTL_IN_MILIS = 900000;
 

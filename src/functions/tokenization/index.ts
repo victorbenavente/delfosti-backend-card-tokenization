@@ -6,12 +6,12 @@ import {
 import {
   CreateTokenRequest,
   ICreateTokenRequest,
-} from '../services/tokenization/dtos/create-token-request.dto';
+} from './dtos/create-token-request.dto';
 import middy from '@middy/core';
-import { httpErrorHandler } from '../common/errors/error-handler';
-import { merchantAuthMiddleware } from '../common/middlewares/auth-merchant.middleware';
-import { TokenizationService } from '../services/tokenization/tokenization.service';
-import { TokenResponse } from '../services/tokenization/dtos/token.response.dto';
+import { httpErrorHandler } from '../../common/errors/error-handler';
+import { merchantAuthMiddleware } from '../../common/middlewares/auth-merchant.middleware';
+import { TokenizationService } from './services/tokenization.service';
+import { TokenResponse } from './dtos/token.response.dto';
 
 export const createToken = async (
   event: APIGatewayProxyEvent,

@@ -10,19 +10,19 @@ provider:
 
 functions:
   health:
-    handler: src/functions/health.handler
+    handler: src/functions/health/index.handler
     events:
       - httpApi:
           path: /health
           method: get
   createToken:
-    handler: src/functions/create-token.handler
+    handler: src/functions/tokenization/index.handler
     events:
       - httpApi:
           path: /create-token
           method: post
   getCardInformation:
-    handler: src/functions/get-card-information.handler
+    handler: src/functions/card-information/index.handler
     events:
       - httpApi:
           path: /card-information/{token}

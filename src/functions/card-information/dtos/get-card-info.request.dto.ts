@@ -1,5 +1,5 @@
 import { assert, object } from 'superstruct';
-import { isValidToken } from '../utils/validators';
+import { isValidToken } from '../utils/validators.utils';
 
 export class GetCardInfoRequest {
   readonly token: string;

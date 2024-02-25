@@ -1,6 +1,6 @@
-import { NotFoundException } from '../../common/errors/not-found.exception';
-import { keyv } from '../../common/redis-store/redis-store';
-import { CardInfoResponse } from './dtos/card-info.response.dto';
+import { NotFoundException } from '../../../common/errors/not-found.exception';
+import { keyv } from '../../../common/redis-store/redis-store';
+import { CardInfoResponse } from '../dtos/card-info.response.dto';
 
 export class CardInformationService {
   public static async getCard(token: string): Promise<CardInfoResponse> {
@@ -11,7 +11,7 @@ export class CardInformationService {
           'Card information expired or not founded, please generate a new token',
         );
       }
-      return JSON.parse(card);
+      return new CardInfoResponse(JSON.parse(card));
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       throw new Error('Fail to get card from datasource');

@@ -6,5 +6,8 @@ const keyvRedis = new KeyvRedis(envConfig.redisUrl);
 keyvRedis.on('error', (err) => {
   console.error({ err, msg: 'Redis connection failed' });
 });
+process.on('uncaughtException', () => {
+  console.error({ msg: 'unknown error' });
+});
 
 export const keyv = new Keyv({ store: keyvRedis });

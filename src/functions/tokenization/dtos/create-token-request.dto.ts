@@ -5,7 +5,7 @@ import {
   isValidCvv,
   isValidMonth,
   isValidYear,
-} from '../utils/validators';
+} from '../utils/validators.utils';
 
 export type ICreateTokenRequest = {
   readonly card_number: string;
