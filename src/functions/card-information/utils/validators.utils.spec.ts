@@ -1,4 +1,4 @@
-import { StructError, assert, object } from 'superstruct';
+import { StructError } from 'superstruct';
 import { isValidToken } from './validators.utils';
 
 describe('validators-utils', () => {

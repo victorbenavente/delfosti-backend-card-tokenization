@@ -1,10 +1,4 @@
-import {
-  isEmail as isValidEmail,
-  isNumberString,
-  max,
-  min,
-  length,
-} from 'class-validator';
+import { isEmail, isNumberString, max, min, length } from 'class-validator';
 import { Result, define } from 'superstruct';
 import { validateCardWithLuhn } from './tokenization.utils';
 
@@ -12,10 +6,10 @@ export const isValidCvv = define('credit card cvv', (cvv: any): Result => {
   return isNumberString(cvv) && length(cvv, 3, 4);
 });
 
-export const isEmail = define(
+export const isValidEmail = define(
   'email(gmail, hotmail, yahoo.es)',
   (email: any): Result => {
-    return isValidEmail(email, {
+    return isEmail(email, {
       host_whitelist: ['hotmail.com', 'yahoo.es', 'gmail.com'],
     });
   },

@@ -1,6 +1,6 @@
 import { assert, object } from 'superstruct';
 import {
-  isEmail,
+  isValidEmail,
   isValidCard,
   isValidCvv,
   isValidMonth,
@@ -38,7 +38,7 @@ export class CreateTokenRequest {
         cvv: isValidCvv,
         expiration_month: isValidMonth,
         expiration_year: isValidYear,
-        email: isEmail,
+        email: isValidEmail,
       }),
     );
   }
