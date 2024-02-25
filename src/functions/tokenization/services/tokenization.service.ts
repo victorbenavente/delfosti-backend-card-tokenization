@@ -12,9 +12,9 @@ export class TokenizationService {
     try {
       const token = generateToken();
       await keyv.set(token, JSON.stringify(data), TTL_IN_MILIS);
-      return { token };
+      return new TokenResponse(token);
     } catch (error) {
-      throw new Error('Fail to store new token');
+      throw new Error('Fail to set token in Redis');
     }
   }
 }

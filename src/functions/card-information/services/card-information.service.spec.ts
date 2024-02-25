@@ -9,18 +9,11 @@ jest.mock('@keyv/redis', () =>
   jest.fn().mockImplementation(() => mockKeyvInstance),
 );
 
+import { cardInfoMock } from '../../../common/__mocks__/card.mock';
 import { CardInfoResponse } from '../dtos/card-info.response.dto';
 import { CardInformationService } from './card-information.service';
 
 describe('CardInformationService', () => {
-  const cardMock = {
-    cvv: 'fake_cvv',
-    card_number: 'fake_card_number',
-    email: 'fake_email',
-    expiration_month: 'fake_month',
-    expiration_year: 'fake_year',
-  };
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -29,17 +22,18 @@ describe('CardInformationService', () => {
     const token = 'Y30f0NDnNySC0Oy7';
     jest
       .spyOn(mockKeyvInstance, 'get')
-      .mockResolvedValue(JSON.stringify(cardMock));
+      .mockResolvedValue(JSON.stringify(cardInfoMock));
 
     const result = await CardInformationService.getCard(token);
 
+    expect(mockKeyvInstance.get).toHaveBeenCalledWith(token);
     expect(result).toBeInstanceOf(CardInfoResponse);
     expect(result).not.toHaveProperty('cvv');
     expect(result).toMatchObject({
-      card_number: cardMock.card_number,
-      email: cardMock.email,
-      expiration_month: cardMock.expiration_month,
-      expiration_year: cardMock.expiration_year,
+      card_number: cardInfoMock.card_number,
+      email: cardInfoMock.email,
+      expiration_month: cardInfoMock.expiration_month,
+      expiration_year: cardInfoMock.expiration_year,
     });
   });
 
@@ -54,7 +48,7 @@ describe('CardInformationService', () => {
     );
   });
 
-  it('should return an Error when Redis store fails', async () => {
+  it('should return an Error when Redis connection fails', async () => {
     const token = 'Y30f0NDnNySC0Oy7';
     jest
       .spyOn(mockKeyvInstance, 'get')
@@ -62,6 +56,6 @@ describe('CardInformationService', () => {
 
     const result = async () => await CardInformationService.getCard(token);
 
-    expect(result).rejects.toThrow('Fail to get card from datasource');
+    expect(result).rejects.toThrow('Fail to get card in Redis');
   });
 });

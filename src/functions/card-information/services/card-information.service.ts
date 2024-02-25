@@ -14,7 +14,7 @@ export class CardInformationService {
       return new CardInfoResponse(JSON.parse(card));
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
-      throw new Error('Fail to get card from datasource');
+      throw new Error('Fail to get card in Redis');
     }
   }
 }
