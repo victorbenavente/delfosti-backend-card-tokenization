@@ -16,7 +16,6 @@ import { TokenResponse } from './dtos/token.response.dto';
 export const createToken = async (
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
-  console.log(event.body);
   const data: ICreateTokenRequest = JSON.parse(event.body as any);
   const request = new CreateTokenRequest(data);
   request.isValid();
