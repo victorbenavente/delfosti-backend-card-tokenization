@@ -28,20 +28,6 @@ functions:
           path: /card-information/{token}
           method: get
 
-resources:
-  Resources:
-    Personas:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: Card
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
