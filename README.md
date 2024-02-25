@@ -1,4 +1,6 @@
 # Backend Serverless Tokenization Process
+## Architecture
+![Imagen BFF](./assets/diagram.png "architecture")
 
 ## Setup Project Local
 
@@ -70,3 +72,27 @@ To run Serverless server you should to execute the next commands:
       "expiration_year": "2025"
     }
     ```
+## AWS endpoints
+- Create token: **post ->** https://qd3akdblli.execute-api.us-east-2.amazonaws.com/create-token example:
+  ```
+  curl --request POST \
+  --url https://qd3akdblli.execute-api.us-east-2.amazonaws.com/create-token \
+  --header 'Authorization: pk_test_BuyK6NguwyPEuD33' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: Postman/8.6.0' \
+  --data '{
+	 "card_number": "4222525676096126",
+   "cvv": "232",
+   "expiration_month": "12",
+   "expiration_year": "2024",
+   "email": "victor@yahoo.es"
+  }'
+  ```
+- Get card information: **get ->** https://qd3akdblli.execute-api.us-east-2.amazonaws.com/card-information/{token} example:
+  ```
+  curl --request GET \
+  --url https://qd3akdblli.execute-api.us-east-2.amazonaws.com/card-information/gIeQ3n1CzkY74kT9 \
+  --header 'Authorization: pk_test_BuyK6NguwyPEuD33' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: Postman/8.6.0'
+  ```
